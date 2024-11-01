@@ -14,7 +14,7 @@
             <form method="POST" action="{{ route('register.post') }}">
                 @csrf
                 <label for="chk" aria-hidden="true">Sign up</label>
-                <input type="text" name="name" placeholder="User name" required="">
+                <input type="text" name="username" placeholder="User name" required="">
                 <input type="email" name="email" placeholder="Email" required="">
                 <input type="password" name="password" placeholder="Password" required="">
                 <input type="password" name="password_confirmation" placeholder="Confirm Password" required="">

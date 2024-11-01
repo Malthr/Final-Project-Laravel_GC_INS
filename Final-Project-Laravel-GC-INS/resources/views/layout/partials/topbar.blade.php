@@ -21,16 +21,25 @@
                     <li class="user-header"> <img src="/img/user2-160x160.jpg" class="rounded-circle shadow"
                             alt="User Image">
                         <p>
-                            Username
+                            {{$user->username}}
+                        </p>
+                        <p>
+                            {{$user->email}}
                         </p>
                     </li>
 
                     <li>
-                        <a class="dropdown-item" href="">View Profile</a>
+                        <a class="dropdown-item" href="{{route('profile.edit')}}">View Profile</a>
                     </li>
 
                     <li>
-                        <a class="dropdown-item" href="">Logout</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            this.closest('form').submit();">
+                                Logout
+                            </a>
+                        </form>
                     </li>
                 </ul>
             </li>
