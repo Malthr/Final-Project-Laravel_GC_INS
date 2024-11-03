@@ -6,7 +6,7 @@
             Our Company
         </a>
 
-        <form class="mx-auto w-50">
+        <form class="mx-auto" style="width: 60vh;">
             <input class="form-control py-2 rounded-pill" type="text" placeholder="Search" aria-label="Search"
                 aria-describedby="search-icon">
         </form>
@@ -22,9 +22,6 @@
                             alt="User Image">
                         <p>
                             {{$user->username}}
-                        </p>
-                        <p>
-                            {{$user->email}}
                         </p>
                     </li>
 
