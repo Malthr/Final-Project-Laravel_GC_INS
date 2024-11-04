@@ -3,17 +3,17 @@
     <div class="container-fluid">
         <p class="mb-0">
             <a class="navbar-brand text-light" href="{{route('homepage')}}">
-                <img alt="Logo Png">
-                Our Company
+                <img class="user-image rounded-circle me-2" src="/img/logo-2.png" alt="Logo Png" style="width:35px">
+                Our Opinion
             </a>
         </p>
 
-        <form class="mx-auto" style="width: 60vh;">
+        <form style="width: 60vh;">
             <input class="form-control py-2 rounded-pill" type="text" placeholder="Search" aria-label="Search"
                 aria-describedby="search-icon">
         </form>
 
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav">
             <li>
                 <form action="{{Route ('post.create')}}">
                     <button class="btn btn-outline-light rounded-pill">

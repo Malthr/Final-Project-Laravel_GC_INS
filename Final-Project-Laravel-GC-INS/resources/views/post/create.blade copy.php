@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('content')
-<!-- Form untuk membuat postingan -->
+    <!-- Form untuk membuat postingan -->
 <div class="col-md-9 mx-auto">
     <div class="container">
     <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
@@ -11,7 +11,7 @@
             <select class="form-control rounded-pill" name="id_topik" id="id_topik" required>
                 <option value="" disabled selected>Topik</option>
                 @foreach($topics as $topic)
-                <option value="{{ $topic->id }}">{{ $topic->topik }}</option>
+                    <option value="{{ $topic->id }}">{{ $topic->topik }}</option>
                 @endforeach
             </select>
         </div>
@@ -46,16 +46,3 @@
 </div>
 
 @endsection
-@push('scripts')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"></script>
-<script>
-    $(document).ready(function() {
-        console.log("Inisialisasi Selectize dimulai."); // Log untuk memastikan ini dieksekusi
-        $('#id_topik').selectize({
-            create: true, // Mengaktifkan kemampuan untuk menambah item baru
-            sortField: 'text'
-        });
-    });
-</script>
-@endpush
