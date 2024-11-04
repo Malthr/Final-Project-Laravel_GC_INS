@@ -1,0 +1,110 @@
+[1mdiff --git a/Final-Project-Laravel-GC-INS/resources/views/homepage.blade.php b/Final-Project-Laravel-GC-INS/resources/views/homepage.blade.php[m
+[1mindex 6624495..5fe8f64 100644[m
+[1m--- a/Final-Project-Laravel-GC-INS/resources/views/homepage.blade.php[m
+[1m+++ b/Final-Project-Laravel-GC-INS/resources/views/homepage.blade.php[m
+[36m@@ -14,7 +14,7 @@[m
+                 </div>[m
+             </div>[m
+             <div class="card-body">[m
+[31m-                <p class="card-text">{{ $post->post_text }}</p>[m
+[32m+[m[32m                <p class="card-text white-space">{!! nl2br(e($post->post_text)) !!}</p>[m
+ [m
+                 @if ($post->gambar)[m
+                     <div class="mt-3">[m
+[1mdiff --git a/Final-Project-Laravel-GC-INS/resources/views/post/create.blade copy.php b/Final-Project-Laravel-GC-INS/resources/views/post/create.blade copy.php[m
+[1mdeleted file mode 100644[m
+[1mindex 7217ec6..0000000[m
+[1m--- a/Final-Project-Laravel-GC-INS/resources/views/post/create.blade copy.php[m	
+[1m+++ /dev/null[m
+[36m@@ -1,48 +0,0 @@[m
+[31m-@extends('layout.master')[m
+[31m-@section('content')[m
+[31m-    <!-- Form untuk membuat postingan -->[m
+[31m-<div class="col-md-9 mx-auto">[m
+[31m-    <div class="container">[m
+[31m-    <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">[m
+[31m-        @csrf[m
+[31m-        <!-- Pilihan Topik -->[m
+[31m-        <h1 class="mb-3 fs-3 fw-bold">Create Post</h1>[m
+[31m-        <div class="col-md-3 mb-3">[m
+[31m-            <select class="form-control rounded-pill" name="id_topik" id="id_topik" required>[m
+[31m-                <option value="" disabled selected>Topik</option>[m
+[31m-                @foreach($topics as $topic)[m
+[31m-                    <option value="{{ $topic->id }}">{{ $topic->topik }}</option>[m
+[31m-                @endforeach[m
+[31m-            </select>[m
+[31m-        </div>[m
+[31m-[m
+[31m-        <!-- Judul Postingan -->[m
+[31m-        <div class="mb-3">[m
+[31m-            <input type="text" class="form-control rounded-4 py-2" id="title" name="title" placeholder="Title *" required>[m
+[31m-        </div>        [m
+[31m-[m
+[31m-        <!-- Isi Postingan -->[m
+[31m-        <div class="mb-3">[m
+[31m-            <textarea class="form-control rounded-4" id="content" name="content" rows="5" placeholder="Body" required></textarea>[m
+[31m-        </div>[m
+[31m-[m
+[31m-        <!-- Upload Gambar -->[m
+[31m-        <div class="">[m
+[31m-            <small class="d-block text-muted" style="font-size:small">Optional</small>[m
+[31m-        </div>[m
+[31m-        [m
+[31m-        <div class="input-group flex-nowrap mb-3">[m
+[31m-            <input type="file" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">[m
+[31m-        </div>[m
+[31m-        [m
+[31m-[m
+[31m-        <!-- ID User (Hidden) -->[m
+[31m-        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">[m
+[31m-[m
+[31m-        <!-- Tombol Post -->[m
+[31m-        <button type="submit" class="btn btn-primary rounded-pill px-3">Post</button>[m
+[31m-    </form>[m
+[31m-</div>[m
+[31m-</div>[m
+[31m-[m
+[31m-@endsection[m
+\ No newline at end of file[m
+[1mdiff --git a/Final-Project-Laravel-GC-INS/resources/views/post/create.blade.php b/Final-Project-Laravel-GC-INS/resources/views/post/create.blade.php[m
+[1mindex 37ed7c8..a906fee 100644[m
+[1m--- a/Final-Project-Laravel-GC-INS/resources/views/post/create.blade.php[m
+[1m+++ b/Final-Project-Laravel-GC-INS/resources/views/post/create.blade.php[m
+[36m@@ -8,14 +8,14 @@[m
+         <!-- Pilihan Topik -->[m
+         <h1 class="mb-3 fs-3 fw-bold">Create Post</h1>[m
+         <div class="col-md-3 mb-3">[m
+[31m-            <select class="form-control rounded-pill" name="id_topik" id="id_topik" required>[m
+[32m+[m[32m            <select class="" name="id_topik" id="id_topik" required>[m
+                 <option value="" disabled selected>Topik</option>[m
+                 @foreach($topics as $topic)[m
+                 <option value="{{ $topic->id }}">{{ $topic->topik }}</option>[m
+                 @endforeach[m
+             </select>[m
+         </div>[m
+[31m-[m
+[32m+[m[41m        [m
+         <!-- Judul Postingan -->[m
+         <div class="mb-3">[m
+             <input type="text" class="form-control rounded-4 py-2" id="title" name="title" placeholder="Title *" required>[m
+[36m@@ -47,15 +47,17 @@[m
+ [m
+ @endsection[m
+ @push('scripts')[m
+[32m+[m[32m<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.default.min.css" />[m
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>[m
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"></script>[m
+[32m+[m
+ <script>[m
+     $(document).ready(function() {[m
+[31m-        console.log("Inisialisasi Selectize dimulai."); // Log untuk memastikan ini dieksekusi[m
+         $('#id_topik').selectize({[m
+[31m-            create: true, // Mengaktifkan kemampuan untuk menambah item baru[m
+[32m+[m[32m            create: true,  // Enables text input[m
+             sortField: 'text'[m
+         });[m
+     });[m
+ </script>[m
+[32m+[m
+ @endpush[m
+\ No newline at end of file[m

@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <p class="card-text">{{ $post->post_text }}</p>
+                <p class="card-text white-space">{!! nl2br(e($post->post_text)) !!}</p>
 
                 @if ($post->gambar)
                     <div class="mt-3">
