@@ -15,7 +15,7 @@ class PostController extends Controller
         $user = Auth::user();
         $posts = Post::with(['topik', 'replys.user'])->get();
 
-        return view('tables', compact('posts','user'));
+        return view('homepage', compact('posts','user'));
     }
 
     public function create()

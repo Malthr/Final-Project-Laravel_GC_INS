@@ -1,5 +1,5 @@
 <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
-    <a href="/" class="d-flex-fill align-items-center p-3 link-dark text-decoration-none border-bottom text-center">
+    <a class="d-flex-fill align-items-center p-3 link-dark text-decoration-none border-bottom text-center">
         <span class="fs-3 fw-semibold">Topic</span>
     </a>
     <div class="list-group list-group-flush overflow-y-scroll" style="max-height: calc(100dvh - 133px);">

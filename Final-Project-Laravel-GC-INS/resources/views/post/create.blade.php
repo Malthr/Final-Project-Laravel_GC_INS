@@ -2,7 +2,7 @@
 @section('content')
     <!-- Form untuk membuat postingan -->
 <div class="container">
-    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <!-- Pilihan Topik -->
         <div class="mb-3">
