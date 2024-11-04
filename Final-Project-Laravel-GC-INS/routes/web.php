@@ -1,15 +1,17 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReplyController;
 use App\Models\User;
 
 Route::get('/', function () {
     return view('auth.auth'); // Menunjuk ke folder auth jika login ada di situ
 });
 
-Route::get('/tables',[ProfileController::class,'index'])->middleware(['auth', 'verified'])->name('table');
+Route::get('/tables',[PostController::class,'index'])->middleware(['auth', 'verified'])->name('table');
 
 // Route::get('/table', function () {
 //     // $profile = User::where('id', $id)->first;
@@ -29,6 +31,12 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.po
 // Rute untuk login
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
+// Rute untuk posting
+Route::get('/post-create', [PostController::class, 'create'])->name('post.create');
+Route::post('/post-create', [PostController::class, 'store'])->name('post.store');
+
+//Rute untuk komentar
+Route::post('/replys/store', [ReplyController::class, 'store'])->name('replys.store');  
 
 // Rute untuk profil
 Route::middleware('auth')->group(function () {
