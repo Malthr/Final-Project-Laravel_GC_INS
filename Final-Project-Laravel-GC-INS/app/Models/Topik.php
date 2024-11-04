@@ -14,6 +14,6 @@ class Topik extends Model
 
     public function postingan()
     {
-        return $this->hasMany(Postingan::class, 'topik_id');
+        return $this->hasMany(Post::class, 'id_topik');
     }
 }

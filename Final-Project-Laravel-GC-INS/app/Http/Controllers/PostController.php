@@ -9,14 +9,27 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Mengambil semua postingan beserta komentar yang berhubungan
         $user = Auth::user();
-        $posts = Post::with(['topik', 'replys.user'])->get();
-
-        return view('homepage', compact('posts','user'));
-    }
+        $topics = Topik::withCount('postingan')->get();
+    
+        // Ambil id_topik dari query string jika ada
+        $id_topik = $request->query('id_topik');
+    
+        // Ambil postingan dengan filter berdasarkan id_topik jika ada
+        if ($id_topik) {
+            $posts = Post::with(['topik', 'replys.user'])
+                         ->where('id_topik', $id_topik)
+                         ->get();
+        } else {
+            // Jika tidak ada filter, ambil semua postingan
+            $posts = Post::with(['topik', 'replys.user'])->get();
+        }
+    
+        return view('homepage', compact('posts', 'user', 'topics'));
+    }    
 
     public function create()
     {

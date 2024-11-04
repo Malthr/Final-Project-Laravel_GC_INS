@@ -3,83 +3,15 @@
         <span class="fs-3 fw-semibold">Topic</span>
     </a>
     <div class="list-group list-group-flush overflow-y-scroll" style="max-height: calc(100dvh - 133px);">
-        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+        @foreach($topics as $topic)
+        <a href="{{ route('homepage', ['id_topik' => $topic->id]) }}" class="list-group-item list-group-item-action"
+            aria-current="true">
             <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss Topic Title Lorem Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
+                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">
+                {{ $topic->topik }}
+            </strong>
+            <div class="col-10 mb-1">{{ $topic->postingan_count }} Jumlah Post</div>
         </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action lh-tight" aria-current="true">
-            <strong class="fs-5 mb-1"
-                style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; display:block">Topic Title Lorem
-                Ipsum Dolor Sit Ametss</strong>
-            <div class="col-10 mb-1">Jumlah Post</div>
-        </a>
+        @endforeach
     </div>
 </div>
