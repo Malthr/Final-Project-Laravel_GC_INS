@@ -27,31 +27,39 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-            // Validasi input
-    $request->validate([
-        'id_topik' => 'required|exists:topiks,id',
-        'title' => 'required|string|max:255',
-        'content' => 'required|string',
-        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Max 2MB
-        'user_id' => 'required|exists:users,id',
-    ]);
-
-    // Upload gambar jika ada
-    $imagePath = null;
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('images', 'public');
-    }
-
-    // Simpan postingan
-    Post::create([
-        'id_topik' => $request->id_topik,
-        'title' => $request->title,
-        'post_text' => $request->content,
-        'gambar' => $imagePath,
-        'id_user' => $request->user_id,
-    ]);
-
-    return redirect()->route('table')->with('success', 'Postingan berhasil dibuat!');
+        // Validasi input, dengan menyesuaikan `id_topik` agar bisa berupa teks atau ID numerik
+        $request->validate([
+            'id_topik' => 'required|string', // String untuk menerima ID atau nama topik baru
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Max 2MB
+            'user_id' => 'required|exists:users,id',
+        ]);
+    
+        // Menangani topik baru jika input `id_topik` adalah teks (bukan angka)
+        $topikId = $request->id_topik;
+        if (!is_numeric($topikId)) {
+            // Simpan topik baru
+            $newTopik = Topik::create(['topik' => $topikId]);
+            $topikId = $newTopik->id; // Ambil ID topik yang baru dibuat
+        }
+    
+        // Upload gambar jika ada
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+        }
+    
+        // Simpan postingan dengan ID topik (baik topik baru atau yang sudah ada)
+        Post::create([
+            'id_topik' => $topikId,
+            'title' => $request->title,
+            'post_text' => $request->content,
+            'gambar' => $imagePath,
+            'id_user' => $request->user_id,
+        ]);
+    
+        return redirect()->route('homepage')->with('success', 'Postingan berhasil dibuat!');
     }
 
     public function edit()
