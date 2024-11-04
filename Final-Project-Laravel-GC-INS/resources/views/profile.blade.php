@@ -38,7 +38,10 @@
             <div class="mb-3">
                 <label for="update_password_current_password" class="form-label">Current Password</label>
                 <input type="password" name="current_password" id="update_password_current_password" class="form-control" placeholder="" aria-describedby="helpId" />
-                <small>Forgot your password? </small><a class="text-reset" href="{{ route('password.request') }}"><small>Forgot Password</small></a>
+                <!-- Incase Someone Forgot Their Current Password -->
+                <form id="forgotPass" action="POST">
+                    <small>Forgot your password? </small><a class="text-reset" id="forgotButton"  style="cursor: pointer"><small>Forgot Password</small></a>
+                </form>
             </div>
 
             <div class="mb-3">
@@ -173,6 +176,39 @@ document.getElementById('deleteButton').onclick = function() {
                 
                 // Submit form
                 document.getElementById('deleteForm').submit();
+            }
+        });
+    };
+
+// PLEASE FIX THIS PART PLEEEEEAAASSSEEEE
+// SweetAlert Forgot Password
+document.getElementById('forgotButton').onclick = function() {
+        swal({
+            title: "You forgot your password ?",
+            text: "No problem. Just let us know your email address and we will email you a link that will allow you to reset your password.",
+            content: {
+                element: "input",
+                attributes: {
+                    placeholder: "Enter your email",
+                    type: "text"
+                },
+            },
+            icon: "info",
+            buttons: true,
+            dangerMode: true,
+        }).then((inputValue) => {
+            if (inputValue) {
+                // Menambahkan input password ke dalam form sebelum disubmit
+                const emailInput = document.createElement("input");
+                emailInput.type = "hidden";
+                emailInput.name = "password"; // Sesuaikan dengan nama field di controller
+                emailInput.value = inputValue; // Mengambil password dari SweetAlert input
+                
+                
+                document.getElementById('forgotForm').appendChild(emailInput);
+                
+                // Submit form
+                document.getElementById('forgotForm').submit();
             }
         });
     };
