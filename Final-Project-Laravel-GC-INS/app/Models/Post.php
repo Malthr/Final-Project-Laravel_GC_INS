@@ -25,4 +25,9 @@ class Post extends Model
     {
         return $this->hasMany(Reply::class, 'id_post');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

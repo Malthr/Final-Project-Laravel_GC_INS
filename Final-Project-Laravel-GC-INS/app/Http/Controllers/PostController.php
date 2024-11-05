@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Topik;
+use App\Models\User;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
@@ -74,6 +75,52 @@ class PostController extends Controller
     
         return redirect()->route('homepage')->with('success', 'Postingan berhasil dibuat!');
     }
+
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+        $query = $request->input('query'); // Mengambil input dari form pencarian
+        
+        // Filter topik dengan jumlah postingan
+        $topics = Topik::withCount('postingan')->get();
+        
+        // Memulai query untuk postingan dengan relasi `topik` dan `replys.user`
+        $postsQuery = Post::with(['topik', 'replys.user']);
+        
+        // Jika ada `id_topik` dalam request, filter postingan berdasarkan `id_topik`
+        $id_topik = $request->query('id_topik');
+        if ($id_topik) {
+            $postsQuery->where('id_topik', $id_topik);
+        }
+        
+        // Melakukan pencarian berdasarkan kolom `topik` atau `username`
+        if ($query) {
+            $postsQuery->whereHas('topik', function ($q) use ($query) {
+                $q->where('topik', 'like', '%' . $query . '%');
+            })->orWhereHas('user', function ($q) use ($query) {
+                $q->where('username', 'like', '%' . $query . '%');
+            });
+        }
+    
+        // Jika permintaan berasal dari AJAX, kembalikan data pencarian dalam format JSON
+        if ($request->ajax()) {
+            // Pencarian `users` dan `topics` sesuai dengan query
+            $users = User::where('username', 'like', '%' . $query . '%')->get();
+            $topics = Topik::where('topik', 'like', '%' . $query . '%')->get();
+            
+            // Mengembalikan hasil dalam bentuk JSON
+            return response()->json([
+                'users' => $users,
+                'topics' => $topics,
+                'posts' => $postsQuery->get() // Mengirim postingan yang difilter
+            ]);
+        }
+        
+        // Jika bukan permintaan AJAX, ambil semua posting yang difilter dan tampilkan di homepage
+        $posts = $postsQuery->get();
+        
+        return view('homepage', compact('posts', 'user', 'topics'));
+    }    
 
     public function edit()
     {

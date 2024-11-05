@@ -38,6 +38,9 @@ Route::post('/post-create', [PostController::class, 'store'])->name('post.store'
 //Rute untuk komentar
 Route::post('/replys/store', [ReplyController::class, 'store'])->name('replys.store');  
 
+Route::get('/search', [PostController::class, 'search'])->name('search');
+
+
 // Rute untuk profil
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

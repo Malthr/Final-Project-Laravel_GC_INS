@@ -2,6 +2,7 @@
 @section('content')
 
 <!-- Card Postingan -->
+<div id="posts-container">
 @foreach ($posts as $post)
     <div class="col-md-9 mx-auto card border-secondary border-opacity-10 mb-3 shadow-none">
         <div class="card">
@@ -10,7 +11,12 @@
                     <h1 class="card-title fs-4 mb-1">{{ $post->title }}</h1>
                 </div>
                 <div class="row">
-                    <small class="d-block text-muted" style="font-size:small">{{ $post->topik->topik ?? 'Topik Tidak Ditemukan' }}</small>
+                    <small class="d-block text-muted" style="font-size:small">
+                        {{ $post->topik->topik ?? 'Topik Tidak Ditemukan' }}
+                    </small>
+                    <small class="d-block text-muted" style="font-size:small">
+                        Diunggah oleh {{ $post->user->username ?? 'Pengguna Tidak Ditemukan' }} pada {{ $post->created_at->format('d M Y, H:i') }}
+                    </small>
                 </div>
             </div>
             <div class="card-body">
@@ -69,6 +75,8 @@
         </div>
     </div>
 @endforeach
+</div>
+
 
 
 @endsection
