@@ -32,7 +32,7 @@
         </div>
         
         <div class="input-group flex-nowrap mb-3">
-            <input type="file" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+            <input type="file" class="form-control" name="image" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
         </div>
         
 
