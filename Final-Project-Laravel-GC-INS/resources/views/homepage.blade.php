@@ -39,9 +39,8 @@
                     </div>
                 @endif
 
-                <!-- Form untuk Komentar -->
                 <div class="mt-3">
-{{-- Comment Button --}}
+                    {{-- Comment Button --}}
                     <a href="#" class="text-secondary" data-bs-toggle="collapse" data-bs-target="#commentList{{ $post->id }}" aria-expanded="false" aria-controls="commentForm{{ $post->id }}">
                         <button class="btn btn-outline-dark rounded-pill">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
@@ -50,7 +49,7 @@
                             Comment
                         </button>
                     </a>
-<a href="#" class="text-secondary" data-bs-toggle="collapse" data-bs-target="#commentForm{{ $post->id }}" aria-expanded="false" aria-controls="commentForm{{ $post->id }}">
+                    <a href="#" class="text-secondary" data-bs-toggle="collapse" data-bs-target="#commentForm{{ $post->id }}" aria-expanded="false" aria-controls="commentForm{{ $post->id }}">
                         <button class="btn btn-outline-dark rounded-pill">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor   ">
                                 <path d="M6.78 1.97a.75.75 0 0 1 0 1.06L3.81 6h6.44A4.75 4.75 0 0 1 15 10.75v2.5a.75.75 0 0 1-1.5 0v-2.5a3.25 3.25 0 0 0-3.25-3.25H3.81l2.97 2.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L1.47 7.28a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"></path>
@@ -73,13 +72,14 @@
                             </div>
                             <button type="submit" class="btn btn-dark rounded-pill px-3 mb-3">Send</button>
                         </form>
-</div>
+                    </div>
 
                     {{-- List Post Comment --}}
                     <div class="collapse mt-2" id="commentList{{ $post->id }}">
                         @foreach ($post->replys as $reply)
                         <div class="border rounded-3 p-2 mb-2">
-                            <p><strong>{{ $reply->user->username }}</strong> berkata:</p>
+                            <img src="{{ $user->profil_pic ? asset('storage/' . $user->profil_pic) : asset('/img/default-profile.png') }}" class="user-image rounded-circle" alt="">
+                            <p><strong>{{ $reply->user->username }}</strong></p>
                             <p>{{ $reply->reply }}</p>
                             @if ($reply->gambar)
                                 <div>
