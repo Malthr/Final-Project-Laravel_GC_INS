@@ -11,32 +11,27 @@ class ReplyController extends Controller
 {
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
+            'reply' => 'nullable|string',
             'id_post' => 'required|exists:posts,id',
-            'reply' => 'required|string|max:1000',
-            'gambar' => 'nullable|file|mimes:jpeg,png,jpg,gif,mp4,mov|max:2048', // Maksimal 2MB
+            'id_reply' => 'nullable|exists:replys,id', // Memastikan ID reply valid
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,video/mp4,video/x-m4v,video/*',
         ]);
-
-        // Membuat instansi Reply baru
+    
+        // Logika untuk menyimpan balasan
         $reply = new Reply();
         $reply->id_user = Auth::id(); // Ambil ID pengguna yang sedang login
-        $reply->id_post = $request->id_post;
-        $reply->id_parent = $request->id_parent; // Jika Anda ingin mengimplementasikan balasan
         $reply->reply = $request->reply;
-
-        // Menyimpan gambar jika diunggah
+        $reply->id_post = $request->id_post; // Mengaitkan balasan dengan post
+        $reply->id_parent = $request->id_reply; // Mengaitkan balasan dengan komentar yang dibalas
+        // Simpan gambar jika ada
         if ($request->hasFile('gambar')) {
-            // Simpan gambar ke storage
-            $path = $request->file('gambar')->store('uploads/reply_images', 'public');
-            $reply->gambar = $path; // Simpan path gambar ke database
+            $reply->gambar = $request->file('gambar')->store('replies', 'public'); // Sesuaikan path penyimpanan sesuai kebutuhan
         }
-
-        // Simpan komentar ke database
         $reply->save();
-
-        // Redirect ke halaman yang diinginkan, misalnya ke halaman postingan
-        return redirect()->back()->with('success', 'Komentar berhasil ditambahkan!');
+    
+        return redirect()->back()->with('status', 'Reply posted successfully.');
     }
+    
 }
 
