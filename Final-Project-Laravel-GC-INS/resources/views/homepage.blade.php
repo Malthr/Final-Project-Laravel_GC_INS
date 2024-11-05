@@ -92,8 +92,13 @@
                         @foreach ($post->replys as $reply)
                         <div class="border rounded-3 p-2 mb-2">
                             <img src="{{ $reply->user->profil_pic ? asset('storage/' . $reply->user->profil_pic) : asset('/img/default-profile.png') }}"
-                                class="user-image rounded-circle" style="width: 50px; height: 50px;" alt="">
-                            <p><strong>{{ $reply->user->username }}</strong></p>
+                                class="user-image rounded-circle mb-3" style="width: 50px; height: 50px;" alt="">
+                            <strong class="ms-3">{{ $reply->user->username }}</strong>
+                            &#x2022; {{-- Dot Symbol --}}
+                            <!-- Menampilkan Waktu -->
+                            <small class="text-muted" style="font-size:small">
+                                {{ $reply->created_at->diffForHumans() }}
+                            </small>
                             {{-- Cek jika ada parent untuk reply --}}
                             @if ($reply->id_parent)
                                 @php
@@ -105,13 +110,13 @@
                                         <strong>Membalas pesan dari {{ $parentReply->user->username }}</strong>
                                     </p>
                                     <p class="text-muted small">
-                                        <strong>{{ $parentReply->reply }}</strong>
+                                        <strong class="border-start border-4 ms-2 ps-3">{{ $parentReply->reply }}</strong>
                                     </p>
                                 @endif
                             @endif
                             <p>{{ $reply->reply }}</p>
                             @if ($reply->gambar)
-                            <div>
+                            <div class="mb-3">
                                 @if (strpos($reply->gambar, '.mp4') !== false || strpos($reply->gambar, '.mov') !==
                                 false)
                                 <video controls class="img-fluid">

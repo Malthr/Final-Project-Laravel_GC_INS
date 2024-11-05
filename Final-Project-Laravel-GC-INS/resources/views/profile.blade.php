@@ -23,8 +23,8 @@
             <!-- Username (Readonly) -->
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" name="username" id="username" class="form-control"
-                    value="{{ old('username', $user->username) }}" readonly aria-describedby="helpId" />
+                <input type="text" name="username" id="username" class="form-control text-muted"
+                    value="{{ old('username', $user->username) }}" disabled />
             </div>
 
             <!-- Email -->
@@ -38,7 +38,7 @@
             </div>
 
             <!-- Tombol Simpan -->
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-secondary">
                 Save
             </button>
         </form>
