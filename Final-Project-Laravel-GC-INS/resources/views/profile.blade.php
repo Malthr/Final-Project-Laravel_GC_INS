@@ -7,24 +7,42 @@
         <h4 class="card-title fw-semibold">Profile Information</h4>
         <br>
         <p class="fs-6">View your account information and update your email</p>
-        <form id='profileForm' action="{{ route('profile.update') }}" method="POST">
-        @csrf
-        @method('patch')
+        <form id="profileForm" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+            
+            <!-- Foto Profil -->
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" name="username" id="username" class="form-control" value="{{ old('username', $user->username) }}" placeholder="" aria-describedby="helpId" />
+                <label for="profil_pic" class="form-label">Photo Profile</label>
+                <input type="file" name="profil_pic" id="profil_pic" class="form-control" aria-describedby="helpId" />
+                @error('profil_pic')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
+            <!-- Username (Readonly) -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" id="username" class="form-control" value="{{ old('username', $user->username) }}" readonly aria-describedby="helpId" />
+            </div>
+
+            <!-- Email -->
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelpId" />
+                <input type="email" class="form-control" name="email" id="email" value="{{ old('email', $user->email) }}" aria-describedby="emailHelpId" />
+                @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
-            <button type="submit" class="btn btn-secondary">
+
+            <!-- Tombol Simpan -->
+            <button type="submit" class="btn btn-primary">
                 Save
             </button>
         </form>
     </div>
 </div>
+
 
 <!-- Update Password -->
 <div class="card text-start mb-4">

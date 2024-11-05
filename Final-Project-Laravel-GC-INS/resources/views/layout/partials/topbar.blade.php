@@ -34,12 +34,13 @@
             </li>
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle show" data-bs-toggle="dropdown">
-                    <img src="/img/user2-160x160.jpg" class="user-image rounded-circle" alt="User Image">
+                    <img src="{{ $user->profil_pic ? asset('storage/' . $user->profil_pic) : '/img/default-profile.png' }}" class="user-image rounded-circle" alt="User Image">
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                    <li class="user-header"> <img src="/img/user2-160x160.jpg" class="rounded-circle shadow"
-                            alt="User Image">
+                    <li class="user-header"> 
+                        <img src="{{ $user->profil_pic ? asset('storage/' . $user->profil_pic) : '/img/default-profile.png' }}" class="user-image rounded-circle" alt="User Image">
+    
                         <p>
                             {{$user->username}}
                         </p>
