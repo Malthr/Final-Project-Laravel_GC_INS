@@ -6,19 +6,30 @@
 @foreach ($posts as $post)
     <div class="col-md-9 mx-auto card border-secondary border-opacity-10 mb-3 shadow-none">
         <div class="card">
-            <div class="card-header pb-1">
+            <div class="card-header pb-">
                 <div class="row">
-                    <h1 class="card-title fs-4 mb-1">{{ $post->title }}</h1>
+                    <div class="col-md-8">
+                        <h1 class="card-title fs-4 mb-1">{{ $post->title }}</h1>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <!-- Menampilkan Pengupload -->
+                        <small class="text-muted" style="font-size:small">
+                            {{ $post->user->username ?? 'Pengguna Tidak Ditemukan' }} 
+                        </small>
+                        &#x2022; {{-- Dot Symbol --}}
+                        <!-- Menampilkan Waktu -->
+                        <small class="text-muted" style="font-size:small">
+                            {{ $post->created_at->diffForHumans() }}
+                        </small>
+                    </div>
                 </div>
                 <div class="row">
                     <small class="d-block text-muted" style="font-size:small">
                         {{ $post->topik->topik ?? 'Topik Tidak Ditemukan' }}
                     </small>
-                    <small class="d-block text-muted" style="font-size:small">
-                        Diunggah oleh {{ $post->user->username ?? 'Pengguna Tidak Ditemukan' }} pada {{ $post->created_at->format('d M Y, H:i') }}
-                    </small>
                 </div>
             </div>
+            
             <div class="card-body">
                 <p class="card-text white-space">{!! nl2br(e($post->post_text)) !!}</p>
 
@@ -80,17 +91,3 @@
 
 
 @endsection
-
-@push('script')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Memastikan jQuery dimuat -->
-<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#example1').DataTable(); // Menginisialisasi DataTable
-});
-</script>
-@endpush
-
-@push('tableStyle')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
-@endpush
