@@ -27,4 +27,9 @@ class Reply extends Model
     {
         return $this->belongsTo(Post::class, 'id_post');
     }
+
+    public function children() {
+        return $this->hasMany(Reply::class, 'id_parent'); // asumsi parent_id adalah kolom untuk relasi balasan
+    }
+    
 }

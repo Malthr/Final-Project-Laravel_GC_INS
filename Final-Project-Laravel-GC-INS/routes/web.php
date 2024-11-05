@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('auth.auth'); // Menunjuk ke folder auth jika login ada di situ
 });
 
-Route::get('/home',[PostController::class,'index'])->middleware(['auth', 'verified'])->name('homepage');
+Route::get('/home',[PostController::class,'index'])->middleware(['auth'])->name('homepage');
 
 // Route::get('/table', function () {
 //     // $profile = User::where('id', $id)->first;
@@ -39,6 +39,9 @@ Route::post('/post-create', [PostController::class, 'store'])->name('post.store'
 Route::post('/replys/store', [ReplyController::class, 'store'])->name('replys.store');  
 
 Route::get('/search', [PostController::class, 'search'])->name('search');
+
+
+
 
 
 // Rute untuk profil
