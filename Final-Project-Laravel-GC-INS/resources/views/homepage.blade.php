@@ -41,7 +41,8 @@
 
                 <!-- Form untuk Komentar -->
                 <div class="mt-3">
-                    <a href="#" class="text-secondary" data-bs-toggle="collapse" data-bs-target="#commentForm{{ $post->id }}" aria-expanded="false" aria-controls="commentForm{{ $post->id }}">
+{{-- Comment Button --}}
+                    <a href="#" class="text-secondary" data-bs-toggle="collapse" data-bs-target="#commentList{{ $post->id }}" aria-expanded="false" aria-controls="commentForm{{ $post->id }}">
                         <button class="btn btn-outline-dark rounded-pill">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
                                 <path d="M1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 13.25 12H9.06l-2.573 2.573A1.458 1.458 0 0 1 4 13.543V12H2.75A1.75 1.75 0 0 1 1 10.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h4.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
@@ -49,12 +50,22 @@
                             Comment
                         </button>
                     </a>
+<a href="#" class="text-secondary" data-bs-toggle="collapse" data-bs-target="#commentForm{{ $post->id }}" aria-expanded="false" aria-controls="commentForm{{ $post->id }}">
+                        <button class="btn btn-outline-dark rounded-pill">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor   ">
+                                <path d="M6.78 1.97a.75.75 0 0 1 0 1.06L3.81 6h6.44A4.75 4.75 0 0 1 15 10.75v2.5a.75.75 0 0 1-1.5 0v-2.5a3.25 3.25 0 0 0-3.25-3.25H3.81l2.97 2.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L1.47 7.28a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"></path>
+                            </svg>
+                            Reply
+                        </button>
+                    </a>
+                    
+                    {{-- Comment Form --}}
                     <div class="collapse mt-2" id="commentForm{{ $post->id }}">
                         <form action="{{ Route('replys.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="id_post" value="{{ $post->id }}">
                             <div class="mb-3">
-                                <textarea name="reply" class="form-control" rows="3" placeholder="Tulis komentar Anda..."></textarea>
+                                <textarea name="reply" class="form-control" rows="3" placeholder="Your Comment..."></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="replyImage{{ $post->id }}" class="form-label">Unggah Gambar atau Video</label>
@@ -62,8 +73,12 @@
                             </div>
                             <button type="submit" class="btn btn-dark rounded-pill px-3 mb-3">Send</button>
                         </form>
+</div>
+
+                    {{-- List Post Comment --}}
+                    <div class="collapse mt-2" id="commentList{{ $post->id }}">
                         @foreach ($post->replys as $reply)
-                        <div class="border p-2 mb-2">
+                        <div class="border rounded-3 p-2 mb-2">
                             <p><strong>{{ $reply->user->username }}</strong> berkata:</p>
                             <p>{{ $reply->reply }}</p>
                             @if ($reply->gambar)
@@ -78,6 +93,32 @@
                                     @endif
                                 </div>
                             @endif
+
+                            {{-- Reply Button --}}
+                            <a href="#" class="text-secondary" data-bs-toggle="collapse" data-bs-target="#replyForm{{ $post->id }}" aria-expanded="false" aria-controls="commentForm{{ $post->id }}">
+                                <button class="btn btn-outline-dark rounded-pill">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor   ">
+                                        <path d="M6.78 1.97a.75.75 0 0 1 0 1.06L3.81 6h6.44A4.75 4.75 0 0 1 15 10.75v2.5a.75.75 0 0 1-1.5 0v-2.5a3.25 3.25 0 0 0-3.25-3.25H3.81l2.97 2.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L1.47 7.28a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"></path>
+                                    </svg>
+                                    Reply
+                                </button>
+                            </a>
+                            
+                            {{-- Reply Form --}}
+                            <div class="collapse mt-2" id="replyForm{{ $post->id }}">
+                                <form action="{{ Route('replys.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="id_post" value="{{ $post->id }}">
+                                    <div class="mb-3">
+                                        <textarea name="reply" class="form-control" rows="3" placeholder="Your Reply..."></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="replyImage{{ $post->id }}" class="form-label">Unggah Gambar atau Video</label>
+                                        <input type="file" name="gambar" class="form-control" id="replyImage{{ $post->id }}" accept="image/*,video/*">
+                                    </div>
+                                    <button type="submit" class="btn btn-dark rounded-pill px-3 mb-3">Send</button>
+                                </form>
+                            </div>
                         </div>
                         @endforeach
                     </div>

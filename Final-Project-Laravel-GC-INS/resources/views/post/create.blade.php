@@ -8,7 +8,7 @@
         <!-- Pilihan Topik -->
         <h1 class="mb-3 fs-3 fw-bold">Create Post</h1>
         <div class="col-md-3 mb-3">
-            <select class="" name="id_topik" id="id_topik" required>
+            <select name="id_topik" id="id_topik" required>
                 <option value="" disabled selected>Topik</option>
                 @foreach($topics as $topic)
                 <option value="{{ $topic->id }}">{{ $topic->topik }}</option>
@@ -47,7 +47,7 @@
 
 @endsection
 @push('scripts')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.default.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.bootstrap5.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"></script>
 

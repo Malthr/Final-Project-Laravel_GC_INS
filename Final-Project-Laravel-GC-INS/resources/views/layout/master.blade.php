@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/adminlte.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.default.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-RKP6h5ozhnYV+fzy44ln0iNj4n0+hLuG5ETZ2knqfhVsK3S+lE5yxjzIFOSRl6o2fQTFhpfF2YH4iwp32sHLRg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="/img/logo-2.png">
     @stack('tableStyles')
 </head>
 
